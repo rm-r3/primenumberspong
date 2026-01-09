@@ -54,8 +54,7 @@ mathematical structures rather than competition alone.
 ## 🚀 Play Online
 
 Live demo:  
-👉 https://rm-r3.github.io/primenumberspong  
-(or Netlify / Vercel deployment)
+👉 https://rm-r3.github.io/primenumberspong 
 
 ---
 
@@ -80,15 +79,25 @@ http://localhost:8000
 
 📁 Project Structure
 primenumberspong/
-├── index.html
+├── index.html                  # Main game entry point
+├── manifest.webmanifest        # PWA / Android install configuration
+├── sw.js                       # Service Worker (offline support)
+├── apple-touch-icon.png        # iOS Home Screen icon (180×180)
+├── favicon_pong_32x32.svg      # SVG favicon
+├── favicon_pong_32x32.png      # PNG favicon fallback
+├── icon-192.png                # Android / PWA icon
+├── icon-192-maskable.png       # Android maskable icon
+├── icon-512.png                # Android / PWA icon
+├── icon-512-maskable.png       # Android maskable icon
+├── AUDIO_NOTICE.txt            # Audio asset licensing notes
+├── LICENSE                     # MIT License
 ├── README.md
-├── LICENSE.txt
-├── AUDIO_NOTICE.txt
+├── .gitignore
 ├── fonts/
 │   ├── Rubik80sFade-Regular.ttf
 │   └── SIL OPEN FONT LICENSE Version 1.1.rtf
 └── sound/
-    └── fx_*.mp3
+    └── fx_*.mp3                # Game sound effects
 
 
 📚 Third-Party Assets & Licenses
@@ -144,7 +153,7 @@ Third-party assets are licensed under their respective licenses.
 Rene Mathis
 AI Product · Creative coding · Interactive systems · Digital art
 	•	GitHub: https://github.com/rm-r3
-	•	LinkedIn: www.linkedin.com/in/rene-mathis-conceptdesign
+	•	LinkedIn: https://www.linkedin.com/in/rene-mathis-conceptdesign
 
 —
 

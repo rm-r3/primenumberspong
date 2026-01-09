@@ -21,14 +21,35 @@
 
   © Rene Mathis
 -->
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
   <head>
     <meta charset="utf-8" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon_pong_32x32.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_pong_32x32.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FKKELVR3X2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FKKELVR3X2');
+    </script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PONG-RM-v000</title>
+    <title>PRIME-PONG-003</title>
+
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=press-start-2p:400" rel="stylesheet" />
+
     <style>
       @font-face {
         font-family: 'Rubik80sFade';
@@ -2420,5 +2441,15 @@ function windowResized() {
 }
     </script>
     </div> <!-- End mainWrapper -->
+    
+    <!-- Service Worker registration -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./sw.js");
+        });
+      }
+    </script>
+
   </body>
 </html>
