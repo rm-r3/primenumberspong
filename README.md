@@ -90,7 +90,7 @@ primenumberspong/
 ├── icon-512.png                # Android / PWA icon
 ├── icon-512-maskable.png       # Android maskable icon
 ├── AUDIO_NOTICE.txt            # Audio asset licensing notes
-├── LICENSE                     # MIT License
+├── LICENSE.md                     # MIT License
 ├── README.md
 ├── .gitignore
 ├── fonts/
