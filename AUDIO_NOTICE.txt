@@ -1,0 +1,14 @@
+Audio Notice
+
+This project includes sound effects originally sourced from Artlist
+and modified by the author for use in this game.
+
+Original sound designers include:
+- Alberto Sueri
+- Folia Soundstudio
+- Soundholder
+
+The audio files are included solely as part of this project and are
+not intended for standalone redistribution or reuse outside this game.
+
+All audio is used in accordance with the Artlist license.
