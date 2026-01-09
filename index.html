@@ -1,12 +1,12 @@
 <!--
-  PONG-RM-v003.1 — Prime Numbers Pong
+  PONG-RM-v003.1.1 — Prime Numbers Pong
   Creative coding / digital art game
 
   Author: Rene Mathis
   Versions:
-    v003.1  (2026-01-09)
-    v003.0  (2025)
-    v001.0  (2023)
+    v003.1.1  (2026-01-09)
+    v003.0.0  (2025–12-21)
+    v001.2.0  (2023-02-29)
 
   Description:
   Experimental 4-player Pong game combining prime number logic,
@@ -863,6 +863,38 @@ let frozenPositions = {
 };
 let unlockedPrimes = [];  // Array to store all unlocked prime numbers
 
+// === GOOGLE ANALYTICS TRACKING ===
+let sessionHighScore = 0;
+let sessionMaxPrime = 0;
+let ufopilotStartTs = null;
+
+// Helper function to track events
+function track(eventName, params = {}) {
+  // Safety: only track if GA loaded
+  if (typeof window.gtag !== "function") return;
+  window.gtag("event", eventName, params);
+}
+
+// Track personal best scores (persisted in localStorage)
+function updatePersonalBestScore(score) {
+  const key = "pong_personal_best_score";
+  const prev = parseInt(localStorage.getItem(key) || "0", 10);
+  if (score > prev) {
+    localStorage.setItem(key, String(score));
+    track("personal_best_score", { score });
+  }
+}
+
+// Track personal best prime (persisted in localStorage)
+function updatePersonalBestPrime(prime, primeType = "regular") {
+  const key = "pong_personal_best_prime";
+  const prev = parseInt(localStorage.getItem(key) || "0", 10);
+  if (prime > prev) {
+    localStorage.setItem(key, String(prime));
+    track("personal_best_prime", { prime, prime_type: primeType });
+  }
+}
+
 function preload() {
   // Font loading disabled - CSS handles fonts instead
   
@@ -1011,6 +1043,17 @@ function checkPrimeAndUpdateShots() {
       lastPrimeCheck = leaderScore;
       shotsAvailable++;
       
+      // Track prime achievement
+      if (leaderScore > sessionMaxPrime) {
+        sessionMaxPrime = leaderScore;
+        let primeType = specialType ? "special" : "regular";
+        track("session_max_prime_updated", {
+          prime: sessionMaxPrime,
+          prime_type: primeType
+        });
+        updatePersonalBestPrime(leaderScore, primeType);
+      }
+      
       // Add to unlocked primes list if not already there
       if (!unlockedPrimes.includes(leaderScore)) {
         unlockedPrimes.push(leaderScore);
@@ -1088,10 +1131,12 @@ function setupGameControls() {
       soundControl.textContent = 'SOUND ON';
       soundControl.classList.remove('inactive');
       soundControl.classList.add('active');
+      track("sound_toggled", { state: "on" });
     } else {
       soundControl.textContent = 'SOUND OFF';
       soundControl.classList.remove('active');
       soundControl.classList.add('inactive');
+      track("sound_toggled", { state: "off" });
     }
   });
   
@@ -1116,24 +1161,32 @@ function setupGameControls() {
     autoPilotActive = !autoPilotActive;
     if (autoPilotActive) {
       ufoPilotButton.classList.add('active');
+      ufopilotStartTs = Date.now();
+      track("ufopilot_toggled", { state: "on" });
     } else {
       ufoPilotButton.classList.remove('active');
+      const seconds = ufopilotStartTs ? Math.round((Date.now() - ufopilotStartTs) / 1000) : 0;
+      track("ufopilot_toggled", { state: "off", seconds_on: seconds });
+      ufopilotStartTs = null;
     }
   });
   
   // About modal
   aboutButton.addEventListener('click', function() {
     aboutModal.classList.add('show');
+    track("ui_about_opened");
   });
   
   aboutClose.addEventListener('click', function() {
     aboutModal.classList.remove('show');
+    track("ui_about_closed");
   });
   
   // Close modal on background click
   aboutModal.addEventListener('click', function(e) {
     if (e.target === aboutModal) {
       aboutModal.classList.remove('show');
+      track("ui_about_closed");
     }
   });
 }
@@ -1530,6 +1583,7 @@ function setup() {
       
       // Mark game as started
       window.gameStarted = true;
+      track("game_started");
       
       // Position ball at center
       xBall = gameWidth / 2;
@@ -2216,6 +2270,14 @@ function updateScore() {
     spans[2].textContent = score[1];  // OBEN (green-blue)
     spans[4].textContent = score[2];  // LEFT (deep pink)
     spans[6].textContent = score[3];  // RIGHT (light blue)
+  }
+  
+  // Track high scores
+  let currentLeader = Math.max(score[0], score[1], score[2], score[3]);
+  if (currentLeader > sessionHighScore) {
+    sessionHighScore = currentLeader;
+    track("session_highscore_updated", { score: sessionHighScore });
+    updatePersonalBestScore(sessionHighScore);
   }
   
   // Check for prime number after score update
