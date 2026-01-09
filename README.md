@@ -1,4 +1,11 @@
+[![Play Online](https://img.shields.io/badge/Play%20Online-GitHub%20Pages-blue?style=for-the-badge)](https://rm-r3.github.io/primenumberspong/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+
+![Prime Numbers Pong – Cover](assets/cover.png)
+
 # 🎮 Prime Numbers Pong 
+
+<video src="assets/preview.mp4" autoplay loop muted playsinline></video>
 
 A creative coding and digital art game that reimagines classic Pong through
 mathematics, rhythm, and generative visuals.
@@ -101,10 +108,13 @@ primenumberspong/
 ├── icon-192-maskable.png       # Android maskable icon
 ├── icon-512.png                # Android / PWA icon
 ├── icon-512-maskable.png       # Android maskable icon
+├── assets/
+│   ├── cover.png               # Repository cover / hero image
+│   └── preview.mp4             # Gameplay preview video (README)
 ├── AUDIO_NOTICE.txt            # Audio asset licensing notes
 ├── ANALYTICS_TRACKING.md       # Analytics implementation documentation
-├── LICENSE.md                  # MIT License
-├── README.md                   # This file
+├── LICENSE                     # MIT License
+├── README.md                   # Project documentation
 ├── .gitignore
 ├── fonts/
 │   ├── Rubik80sFade-Regular.ttf
