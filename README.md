@@ -113,7 +113,7 @@ primenumberspong/
 │   └── preview.mp4             # Gameplay preview video (README)
 ├── AUDIO_NOTICE.txt            # Audio asset licensing notes
 ├── ANALYTICS_TRACKING.md       # Analytics implementation documentation
-├── LICENSE                     # MIT License
+├── LICENSE.md                  # MIT License
 ├── README.md                   # Project documentation
 ├── .gitignore
 ├── fonts/
